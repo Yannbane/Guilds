@@ -1,0 +1,51 @@
+<html>
+     <head>
+          <script language = javascript>
+               init = function()
+               {
+                    gs = document.getElementById("gs");
+                    
+                    for (g = 0; g < window.opener.game.allGuilds.length; g++)
+                         gs.appendChild(new Option(window.opener.game.allGuilds[g].n, window.opener.game.allGuilds[g].n));                 
+               }
+
+               jOin = function()
+               {
+                    gs = document.getElementById("gs");
+                    window.opener.input.options = "joinGuild";
+                    window.opener.input.jwg = gs.value;
+                    document.write("Applied to " + gs.value);
+               }
+               
+               create = function()
+               {
+                    window.opener.input.options = "createGuild";
+                    window.opener.input.gldn = document.forms["crt"]["name"].value;
+                    
+                    window.opener.game.socket.on("created", function(data)
+                    {
+                         document.write("Created a guild!");
+                         window.opener.game.pl.guild = data.info;
+                    });
+               }
+          </script>
+     </head>
+
+     <body onload = "init()">
+          <h3> You aren't in a guild. </h3>
+
+          <input type = "text" name = "b" id = "gs"/>
+          <input id = "join" type = "button" value = "Join" onclick = "jOin()"/></td>
+          </br>
+          </br>
+          </br>
+
+          <form name = "crt" id = "crt">
+               <p>Name:</p>
+               <input type = "text" name = "name"/>
+               
+               </br>
+               <input type = "button" onclick = "create()" value="Create"/>
+          </form>
+     </body>
+</html>

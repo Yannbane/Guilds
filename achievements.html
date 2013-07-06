@@ -1,0 +1,21 @@
+<html>
+     <head>
+          <script language = javascript>
+               show = function()
+               {
+                    //document.getElementById("name").innerHTML = window.opener.game.pl.guild.n;
+                    achs = document.getElementById("achs");
+                    buffer = "";
+                    for (a in window.opener.game.pl.ach)
+                         buffer += window.opener.game.pl.ach[a].n + ", ";
+
+                    achs.innerHTML = buffer;
+               }
+          </script>
+     </head>
+
+     <body onload = "show()">
+          <h1 id = "name" align = "center"> Achievements </h1>
+          <p id = "achs" ></p>
+     </body>
+</html>

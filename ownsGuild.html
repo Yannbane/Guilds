@@ -1,0 +1,43 @@
+<html>
+     <head>
+          <script language = javascript>
+               show = function()
+               {
+                    document.getElementById("name").innerHTML = window.opener.game.pl.guild.n;
+                    var app = document.getElementById("app");
+                    var apps = window.opener.game.pl.guild.app;
+                    
+                    for (a in apps)
+                    {
+                         var appAdd = document.createElement("option");
+                         appAdd.text = apps[a];
+                         appAdd.value = apps[a];
+                    
+                         app.add(appAdd);
+                    }
+               }
+
+               aaccept = function()
+               {
+                    console.log("Accepting");
+                    var app = document.getElementById("app");
+
+                    window.opener.input.options = "acceptApp";
+                    window.opener.input.an = app.options[app.selectedIndex].value;
+               }
+          </script>
+     </head>
+
+     <body onload = "show()">
+          <h1 id = "name" align = "center"> ### </h1>
+
+		<div style="text-align:center">
+               <p>You own this guild.</p>
+		</div>
+
+		<p>Applications:</p>
+          <select id = "app"></select>
+
+          <input type = "button" onclick = "aaccept();" value = "Accept application" />
+     </body>
+</html>

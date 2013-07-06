@@ -1,0 +1,14 @@
+body
+{
+	background-color: rgb(205, 205, 190)
+}
+
+canvas
+{
+     border: 0px solid black;
+}
+
+audio
+{
+     display: none
+}

@@ -1,0 +1,44 @@
+<html>
+     <head>
+          <script language = javascript>
+               show = function()
+               {
+                    document.getElementById("name").innerHTML = window.opener.game.pl.stats.cinfo.n;
+
+                    document.getElementById("level").innerHTML += window.opener.game.pl.stats.cinfo.level.level;
+                    document.getElementById("armor").innerHTML += window.opener.game.pl.stats.cinfo.armor;
+
+                    document.getElementById("attack").innerHTML += window.opener.game.pl.stats.talents.attack;
+                    document.getElementById("speed").innerHTML += window.opener.game.pl.stats.talents.speed;
+                    document.getElementById("effect").innerHTML += window.opener.game.pl.stats.talents.effect;
+
+                    document.getElementById("buildingw").innerHTML += window.opener.game.pl.stats.skills.building.wood;
+                    document.getElementById("buildings").innerHTML += window.opener.game.pl.stats.skills.building.stone;
+                    document.getElementById("buildingi").innerHTML += window.opener.game.pl.stats.skills.building.iron;
+
+                    document.getElementById("attacks").innerHTML += window.opener.game.pl.stats.skills.attack;
+                    document.getElementById("woodCutting").innerHTML += window.opener.game.pl.stats.skills.woodCutting;
+               }
+          </script>
+     </head>
+
+     <body onload = "show()">
+          <h1 id = "name" align = "center"> ### </h1>
+          <hr>
+          <h2> Character info: </h2>
+               <p id = "level" >Level: </p>
+               <p id = "armor" >Armor: </p>
+
+          <h2> Talents: </h2>
+               <p id = "attack" >Attack: </p>
+               <p id = "speed" >Speed: </p>
+               <p id = "effect" >Effect: </p>
+
+          <h2> Skills: </h2>
+               <p id = "buildingw" >Building with wood: </p>
+               <p id = "buildings" >Building with stone: </p>
+               <p id = "buildingi" >Building with iron: </p>
+               <p id = "attacks" >Attack: </p>
+               <p id = "woodCutting" >Woodcutting: </p>
+     </body>
+</html>

@@ -1,0 +1,81 @@
+<!-- started on 28.8.2011. -->
+
+<html>
+	<head>	
+		<title>Guilds</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+          <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	     
+	     <script type = "text/javascript">
+	          register = function()
+	          {
+                    var n = document.forms['reg']['name'].value;
+	               var p = document.forms['reg']['password'].value;
+	               var email = document.forms['reg']['email'].value;
+                    var faction = document.forms["reg"]["faction"][document.forms["reg"]["faction"].selectedIndex].value;
+
+	               var n_good = true;
+	               var p_good = true;
+	               var email_good = true;
+	               	               
+	               if (!(n.length > 3))
+	                    n_good = false;
+
+	               if (!(p.length > 3))
+	                    p_good = false;
+
+                    if (n_good && p_good && email_good)
+                    {	         
+                         var socket = io.connect("http://localhost:8080");
+                         socket.emit("register", {"n": n, "p": p, "email": email, "faction": faction});
+                         socket.on("got", function(data){
+                              if (data.good)
+                                   alert("You have registered.")
+                              else
+                                   alert("Failed to register.");
+                         });
+	               }
+	               else
+	               {
+                         if (!(n_good))
+                              alert("Name must be longer than 3 characters.")
+                         
+                         if (!(p_good))
+                              alert("Password must be longer than 4 characters.")
+	               }
+	          }
+	     </script>
+	</head>
+	
+	<body>
+		<h1 align = "center">Guilds</h1>
+		
+		<div style="text-align:center">
+		     <a href="game.html">Play</a>
+		</div>
+		
+		</br>
+
+          <form name = "reg">
+               Name:</br>
+               <input type = "text" name = "name"></br></br>
+               
+               Password:</br>
+               <input type = "password" name = "password"></br></br>
+               
+               Email:</br>
+               <input type = "text" name = "email"></br>
+               
+               <select id = "faction">
+                    <option value = "human">Human</option>
+                    <option value = "undead">Undead</option>
+                    <option value = "orc">Orc</option>
+                    <option value = "elf">Elf</option>
+               </select>
+
+               </br>
+               </br>
+               <input type = "button" onclick = "register()" value="Register" />
+          </form>
+	</body>
+</html>

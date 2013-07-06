@@ -1,0 +1,80 @@
+ <html>
+	<head>
+		<title>Guilds</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script type="text/javascript" src="input.js"></script>
+		<script type="text/javascript" src="guilds.js"></script>
+          <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<!--          <script type="text/javascript" src ="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script> -->
+
+		<script type="text/javascript">
+               function playSound(soundid)
+               {
+                    document.getElementById(soundid).currentTime = 0;
+                    document.getElementById(soundid).play();
+               }
+               
+			var fps = 60;
+			var mspf = 1000 / fps;
+			var sx = document.width - 25;
+			var sy = document.height - 50;
+               var game = {"showStats": function(){alert("Not logged in!")}}
+
+	          login = function()
+	          {
+	               var n = document.forms['logn']['name'].value;
+	               var p = document.forms['logn']['password'].value;	          
+
+                    var socket = io.connect("http://bljak.org:8080");
+                    socket.emit("login", {n: n, p: p});
+
+                    socket.on("got", function(data){
+                         if (data.good)
+                              main(socket, n)
+                         else
+                              alert("Failed to log in.");
+                    });
+	          }
+			
+		     main = function(socket, n)
+			{
+				var canvas = document.getElementById('canvas');
+				document.getElementById("body").removeChild(document.getElementById('lgn'))
+				canvas.width = sx;
+				canvas.height =  sy;
+				game = new g(canvas, socket, sx, sy, n);
+				setInterval("game.update()", mspf);
+				setInterval("game.checkInput()", mspf);
+			}		
+			
+          </script>
+	</head>
+
+	<body onkeydown="press(event);" onkeyup="release(event);" id = "body">
+		<canvas id="canvas" width="0" height="0"></canvas>
+          <form name = "logn" id = "lgn">
+               <p>Name:</p>
+               <input type = "text" name = "name" />
+               
+               <p>Password:</p>
+               <input type = "password" name = "password" />
+               
+               </br>
+               <input type = "button" onclick = "login()" value="Login" />
+          </form>
+          
+          <audio id = "hammer" src="res/sounds/Building/hammer.wav"></audio>
+          <audio id = "build" src="res/sounds/Building/construction.wav"></audio>
+                     
+          <table border="0">
+               <tr>
+                    <td><a href = "index.html">Home</a></td>
+                    <td><a href = "game.html">Log Out</a></td>
+                    <td><input id = "stats" type = "button" value = "Stats" onclick = "game.showStats()"/></td>
+                    <td><input id = "guild" type = "button" value = "Guild" onclick = "game.guild()"/></td>
+                    <td><input id = "ach" type = "button" value = "Achievements" onclick = "game.showAch()"/></td>
+               </tr>
+          </table>  
+          <!--<object width="0" height="0"><param name="movie" value="http://www.youtube.com/v/NRbDLIXAp4o&feature=results_main&playnext=1&list=PL46BDF290C9FB867F&autoplay=1"></param><embed src="http://www.youtube.com/v/NRbDLIXAp4o&feature=results_main&playnext=1&list=PL46BDF290C9FB867F&autoplay=1" type="application/x-shockwave-flash" width="0" height="0"></embed></object>-->    
+     </body>
+</html>
