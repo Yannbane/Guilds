@@ -1,4 +1,5 @@
 Guilds
 ======
 
-And game I made while learning javaScript - terrible code warning!
+A game I made while learning javaScript - terrible code warning!
+
