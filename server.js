@@ -15,7 +15,7 @@ handler = function(req, res)
           if (err)
           {
                res.writeHead(404);
-               return res.end('file not found');
+               return res.end("file not found " + req.url);
           }
                     
           res.writeHead(200);
@@ -143,8 +143,8 @@ Enemy = function(args) //n, rect, img, id, health, speed, currentStage
      e.id = args.id;
      e.skills = args.skills;
      
-     if (e.skills == undefined)
-          console.log(skills);
+     //if (e.skills == undefined)
+     //     console.log(skills);
 
      e.level = args.level;
      e.speed = args.speed;

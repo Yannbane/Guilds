@@ -14,18 +14,19 @@
                     document.getElementById(soundid).play();
                }
                
-			var fps = 60;
-			var mspf = 1000 / fps;
-			var sx = document.width - 25;
-			var sy = document.height - 50;
                var game = {"showStats": function(){alert("Not logged in!")}}
 
 	          login = function()
 	          {
+			fps = 60;
+			mspf = 1000 / fps;
+			sx = document.body.clientWidth - 25;
+			sy = document.body.clientHeight - 50;
+			console.log(sx+"   "+sy);
 	               var n = document.forms['logn']['name'].value;
 	               var p = document.forms['logn']['password'].value;	          
 
-                    var socket = io.connect("http://bljak.org:8080");
+                    var socket = io.connect("http://yannbane.net:8080");
                     socket.emit("login", {n: n, p: p});
 
                     socket.on("got", function(data){
@@ -51,7 +52,7 @@
 	</head>
 
 	<body onkeydown="press(event);" onkeyup="release(event);" id = "body">
-		<canvas id="canvas" width="0" height="0"></canvas>
+		<canvas id="canvas" width="1000" height="600"></canvas>
           <form name = "logn" id = "lgn">
                <p>Name:</p>
                <input type = "text" name = "name" />

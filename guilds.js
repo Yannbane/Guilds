@@ -1,5 +1,6 @@
 g = function(canvas, socket, sx, sy, nm)
 {
+    console.log(sx + "   " + sy);
 	var self = this; 
      var did = false;
     

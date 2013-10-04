@@ -26,7 +26,7 @@
 
                     if (n_good && p_good && email_good)
                     {	         
-                         var socket = io.connect("http://localhost:8080");
+                         var socket = io.connect("http://yannbane.net:8080");
                          socket.emit("register", {"n": n, "p": p, "email": email, "faction": faction});
                          socket.on("got", function(data){
                               if (data.good)
